@@ -1,0 +1,79 @@
+yumz1982@yumz1982deMacBook-Pro adhd-fintech-app %  npm install expo@~51.0.0 react@18.2.0 react-native@0.74.1 --save && npx expo start
+npm warn deprecated uuid@7.0.3: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated querystring@0.2.1: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+npm warn deprecated sudo-prompt@9.2.1: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+npm warn deprecated osenv@0.1.5: This package is no longer supported.
+npm warn deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm warn deprecated @babel/plugin-proposal-logical-assignment-operators@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-logical-assignment-operators instead.
+npm warn deprecated @babel/plugin-proposal-optional-catch-binding@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-catch-binding instead.
+npm warn deprecated @babel/plugin-proposal-async-generator-functions@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-async-generator-functions instead.
+npm warn deprecated @babel/plugin-proposal-object-rest-spread@7.20.7: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-object-rest-spread instead.
+npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+npm warn deprecated @xmldom/xmldom@0.7.13: this version has critical issues, please update to the latest version
+npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.1.6: Old versions of glob are no longer supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.1.6: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm warn deprecated glob@7.1.6: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+added 634 packages, removed 39 packages, changed 60 packages, and audited 1098 packages in 4m
+
+156 packages are looking for funding
+  run `npm fund` for details
+
+26 vulnerabilities (1 low, 13 moderate, 12 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+Starting project at /Users/yumz1982/Desktop/adhd-fintech-app
+Starting Metro Bundler
+
+TypeScript: The tsconfig.json has been updated (Use EXPO_NO_TYPESCRIPT_SETUP to skip)
+
+› Required modifications made to the tsconfig.json:
+
+  extends is now expo/tsconfig.base
+
+
+The following packages should be updated for best compatibility with the installed expo version:
+  react-native@0.74.1 - expected version: 0.74.5
+  @types/react@18.3.31 - expected version: ~18.2.79
+typescript@5.9.3 - expected version: ~5.3.3
+Your project may not work correctly until you install the expected versions of the packages.
+▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+█ ▄▄▄▄▄ █▄▄███▀▄█▀█ ▄▄▄▄▄ █
+█ █   █ █ ▀█ ▄ ▄▀ █ █   █ █
+█ █▄▄▄█ █▄ ▄▄▀▀▀▄▀█ █▄▄▄█ █
+█▄▄▄▄▄▄▄█▄▀▄▀▄█ ▀ █▄▄▄▄▄▄▄█
+█    ▀▀▄▀ ▀███▀▀▄▄▄██▄ ▄▀▄█
+██▀█▄▀▀▄█▄██▀▀ ▄█ █ ▀██▀███
+███▀  █▄█  ▀ █ █ ▄█ ▄ █ █▀█
+█▀▄▀█▄▀▄ ▀ ▀█ ▄██ ▀▀█▀▀█ ▀█
+████▄██▄▄   ▄▀  ▄ ▄▄▄ ▀▄█▀█
+█ ▄▄▄▄▄ ██▄▄▄ █▀█ █▄█ █▄ ▄█
+█ █   █ █▀█▄▄▀▀▀▀▄▄   █▀▀ █
+█ █▄▄▄█ █ ▀ ▄▄▀▄▀▄▀▄█▄▄ ▄██
+█▄▄▄▄▄▄▄█▄█▄██▄█▄██████▄▄▄█
+
+› Metro waiting on exp://192.168.1.174:8081
+› Scan the QR code above with Expo Go (Android) or the Camera app (iOS)
+
+› Using Expo Go
+› Press s │ switch to development build
+
+› Press a │ open Android
+› Press i │ open iOS simulator
+› Press w │ open web
+
+› Press j │ open debugger
+› Press r │ reload app
+› Press m │ toggle menu
+› Press o │ open project code in your editor
+
+› Press ? │ show all commands
+
+Logs for your project will appear below. Press Ctrl+C to exit.
