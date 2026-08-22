@@ -1,6 +1,6 @@
-# BrainQuest
+# ADHD-mcguffey-reflex
 
-BrainQuest is an ADHD-friendly reading and reflex practice app built on Expo and React Native. It guides learners through short English reading missions, vocabulary and comprehension checks, and progression-oriented practice loops designed for focus, confidence, and repetition.
+ADHD-mcguffey-reflex is an ADHD-friendly reading and reflex practice app built on Expo and React Native. It guides learners through short English reading missions, vocabulary and comprehension checks, and progression-oriented practice loops designed for focus, confidence, and repetition.
 
 ## Product direction
 
