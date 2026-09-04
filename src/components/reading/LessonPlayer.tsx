@@ -3,9 +3,10 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { LESSONS, getLessonById } from '../../data/lessons'
 import { useAuth } from '../../contexts/AuthContext'
 import { saveAttempt, fetchStreak, updateStreak } from '../../lib/progressStore'
-import ShadowReader from '../reading/ShadowReader'
+import { ShadowReader } from '../reading/ShadowReader'
 import QuizModal from '../quiz/QuizModal'
-import type { SpeechMetrics } from '../../hooks/useSpeechRecognition'
+
+type ReadingResult = { accuracy: number; speed: number; mastered: boolean }
 
 type Phase = 'intro' | 'shadow-reading' | 'results' | 'quiz' | 'final'
 
@@ -23,7 +24,7 @@ export default function LessonPlayer() {
   const lesson = getLessonById(lessonId)
 
   const [phase, setPhase] = useState<Phase>('intro')
-  const [metrics, setMetrics] = useState<SpeechMetrics | null>(null)
+  const [metrics, setMetrics] = useState<ReadingResult | null>(null)
   const [quizScore, setQuizScore] = useState<number | null>(null)
   const [saved, setSaved] = useState(false)
 
@@ -37,7 +38,7 @@ export default function LessonPlayer() {
   const prevLesson = LESSONS.find(l => l.lesson_order === lesson.lesson_order - 1)
   const nextLesson = LESSONS.find(l => l.lesson_order === lesson.lesson_order + 1)
 
-  const handleShadowComplete = (m: SpeechMetrics) => {
+  const handleShadowComplete = (m: ReadingResult) => {
     setMetrics(m)
     setPhase('results')
   }
@@ -56,8 +57,8 @@ export default function LessonPlayer() {
         accuracy: metrics?.accuracy || 0,
         speed: metrics?.speed || 0,
         mastered,
-        transcript: metrics?.transcript || '',
-        attempt_duration_seconds: metrics?.durationSeconds || 0,
+        transcript: '',
+        attempt_duration_seconds: 0,
       }, user?.id)
 
       const { data: streakData } = await fetchStreak()
@@ -140,7 +141,7 @@ export default function LessonPlayer() {
       )}
 
       {phase === 'shadow-reading' && (
-        <ShadowReader content={lesson.content} onComplete={handleShadowComplete} />
+        <ShadowReader targetText={lesson.content} onComplete={handleShadowComplete} />
       )}
 
       {phase === 'results' && metrics && (
@@ -162,17 +163,12 @@ export default function LessonPlayer() {
                 <div className="text-xs text-text-muted font-medium mt-1">Words/Min</div>
               </div>
               <div className="text-center p-4 bg-gray-50 rounded-xl">
-                <div className="text-3xl font-extrabold text-secondary">{metrics.durationSeconds}s</div>
-                <div className="text-xs text-text-muted font-medium mt-1">Duration</div>
+                <div className={`text-3xl font-extrabold ${metrics.mastered ? 'text-success' : 'text-secondary'}`}>
+                  {metrics.mastered ? '✓' : '↺'}
+                </div>
+                <div className="text-xs text-text-muted font-medium mt-1">Mastery</div>
               </div>
             </div>
-
-            {metrics.transcript && (
-              <div className="bg-gray-50 rounded-xl p-4 mb-4">
-                <h4 className="text-xs font-bold text-text-muted mb-2">Your Transcript</h4>
-                <p className="text-sm text-text italic">"{metrics.transcript}"</p>
-              </div>
-            )}
 
             {metrics.accuracy >= 90 ? (
               <div className="bg-green-50 text-success p-4 rounded-xl text-sm font-medium">

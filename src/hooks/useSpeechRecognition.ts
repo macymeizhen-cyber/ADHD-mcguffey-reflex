@@ -1,168 +1,171 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react';
+
+// Browser-native Web Speech API type declarations (no external dependency)
+type SpeechRecognition = {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  start(): void;
+  stop(): void;
+  abort(): void;
+  onresult: ((event: SpeechRecognitionEvent) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
+  onend: (() => void) | null;
+};
+
+interface SpeechRecognitionResult {
+  readonly isFinal: boolean;
+  readonly length: number;
+  [index: number]: { readonly transcript: string };
+}
+
+interface SpeechRecognitionResultList {
+  readonly length: number;
+  [index: number]: SpeechRecognitionResult;
+}
+
 interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList
-  resultIndex: number
+  readonly resultIndex: number;
+  readonly results: SpeechRecognitionResultList;
 }
 
 interface SpeechRecognitionErrorEvent extends Event {
-  error: string
-}
-
-interface SpeechRecognitionInstance extends EventTarget {
-  continuous: boolean
-  interimResults: boolean
-  lang: string
-  start(): void
-  stop(): void
-  abort(): void
-  onresult: ((event: SpeechRecognitionEvent) => void) | null
-  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null
-  onend: (() => void) | null
+  readonly error: string;
 }
 
 declare global {
   interface Window {
-    SpeechRecognition: new () => SpeechRecognitionInstance
-    webkitSpeechRecognition: new () => SpeechRecognitionInstance
+    SpeechRecognition: new () => SpeechRecognition;
+    webkitSpeechRecognition: new () => SpeechRecognition;
   }
 }
 
-export interface TranscriptSegment {
-  text: string
-  timestamp: number
+interface UseSpeechRecognitionProps {
+  targetText: string;
+  onResult?: (result: { accuracy: number; speed: number; transcript: string }) => void;
 }
 
-export interface SpeechMetrics {
-  accuracy: number
-  speed: number
-  transcript: string
-  durationSeconds: number
-}
-
-export function useSpeechRecognition() {
-  const [isListening, setIsListening] = useState(false)
-  const [transcript, setTranscript] = useState('')
-  const [interimTranscript, setInterimTranscript] = useState('')
-  const [isSupported, setIsSupported] = useState(false)
-  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null)
-  const startTimeRef = useRef<number>(0)
-  const segmentsRef = useRef<TranscriptSegment[]>([])
-  const transcriptRef = useRef('')
-
-  const commitTranscript = useCallback((newTranscript: string) => {
-    transcriptRef.current = newTranscript
-    setTranscript(newTranscript)
-  }, [])
+export function useSpeechRecognition({ targetText, onResult }: UseSpeechRecognitionProps) {
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcript, setTranscript] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const startTimeRef = useRef<number>(0);
 
   useEffect(() => {
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
-    setIsSupported(!!SpeechRecognitionAPI)
-  }, [])
-
-  const getMetrics = useCallback((targetText: string): SpeechMetrics => {
-    const duration = (Date.now() - startTimeRef.current) / 1000
-    const currentTranscript = transcriptRef.current
-    const wordsSpoken = currentTranscript.split(/\s+/).filter(Boolean).length
-    const speed = duration > 0 ? (wordsSpoken / duration) * 60 : 0
-
-    const targetWords = targetText.toLowerCase().split(/\s+/).filter(Boolean)
-    const spokenWords = currentTranscript.toLowerCase().split(/\s+/).filter(Boolean)
-
-    let matches = 0
-    const usedIndices = new Set<number>()
-
-    for (const spoken of spokenWords) {
-      for (let i = 0; i < targetWords.length; i++) {
-        if (!usedIndices.has(i) && spoken === targetWords[i]) {
-          matches++
-          usedIndices.add(i)
-          break
-        }
-      }
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setError('您的浏览器不支持语音识别，请使用 Chrome、Edge 或 Safari');
+      return;
     }
 
-    const accuracy = targetWords.length > 0 ? (matches / targetWords.length) * 100 : 0
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
 
-    return {
-      accuracy: Math.round(accuracy * 100) / 100,
-      speed: Math.round(speed * 100) / 100,
-      transcript: currentTranscript,
-      durationSeconds: Math.round(duration),
-    }
-  }, [])
-
-  const startListening = useCallback((lang = 'en-US') => {
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition
-    if (!SpeechRecognitionAPI) return
-
-    const recognition = new SpeechRecognitionAPI()
-    recognition.continuous = true
-    recognition.interimResults = true
-    recognition.lang = lang
-
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
-      let interim = ''
-      let final = ''
-
+    recognition.onresult = (event) => {
+      let finalTranscript = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const result = event.results[i]
-        if (result.isFinal) {
-          final += result[0].transcript + ' '
-          segmentsRef.current.push({
-            text: result[0].transcript,
-            timestamp: Date.now(),
-          })
-        } else {
-          interim += result[0].transcript
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
         }
       }
-
-      if (final) {
-        const combined = (transcriptRef.current + ' ' + final).trim()
-        commitTranscript(combined)
+      if (finalTranscript) {
+        setTranscript(finalTranscript);
+        const targetWords = targetText.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+        const spokenWords = finalTranscript.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+        
+        let correctWords = 0;
+        for (let i = 0; i < Math.min(targetWords.length, spokenWords.length); i++) {
+          if (targetWords[i] === spokenWords[i]) {
+            correctWords++;
+          }
+        }
+        const accuracy = targetWords.length > 0 ? (correctWords / targetWords.length) * 100 : 0;
+        
+        const elapsedSeconds = (Date.now() - startTimeRef.current) / 1000;
+        const speed = elapsedSeconds > 0 ? (spokenWords.length / elapsedSeconds) * 60 : 0;
+        
+        if (onResult) {
+          onResult({
+            accuracy: Math.round(accuracy),
+            speed: Math.round(speed),
+            transcript: finalTranscript
+          });
+        }
       }
-      setInterimTranscript(interim)
-    }
+    };
 
-    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      if (event.error !== 'no-speech') {
-        console.error('Speech recognition error:', event.error)
+    recognition.onerror = (event) => {
+      if (event.error === 'not-allowed') {
+        setError('请允许浏览器访问麦克风权限，然后重试');
+      } else if (event.error === 'no-speech') {
+        setError('没有检测到语音，请确保麦克风正常工作');
+      } else {
+        setError(`语音识别错误: ${event.error}`);
       }
-    }
+      setIsRecording(false);
+    };
 
     recognition.onend = () => {
-      setIsListening(false)
+      setIsRecording(false);
+    };
+
+    recognitionRef.current = recognition;
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.abort();
+      }
+    };
+  }, [targetText, onResult]);
+
+  const startRecording = () => {
+    setError(null);
+    setTranscript('');
+    if (!recognitionRef.current) {
+      setError('语音识别未初始化，请刷新页面重试');
+      return;
     }
+    try {
+      startTimeRef.current = Date.now();
+      recognitionRef.current.start();
+      setIsRecording(true);
+    } catch (err) {
+      setError('无法启动麦克风，请检查权限设置');
+      console.error(err);
+    }
+  };
 
-    recognitionRef.current = recognition
-    commitTranscript('')
-    setInterimTranscript('')
-    segmentsRef.current = []
-    startTimeRef.current = Date.now()
-    recognition.start()
-    setIsListening(true)
-  }, [commitTranscript])
-
-  const stopListening = useCallback(() => {
-    recognitionRef.current?.stop()
-    setIsListening(false)
-    setInterimTranscript('')
-  }, [])
-
-  const reset = useCallback(() => {
-    commitTranscript('')
-    setInterimTranscript('')
-    segmentsRef.current = []
-  }, [commitTranscript])
+  const stopRecording = () => {
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch (err) {
+        // 忽略
+      }
+    }
+    setIsRecording(false);
+  };
 
   return {
-    isListening,
+    isRecording,
     transcript,
-    interimTranscript,
-    isSupported,
-    startListening,
-    stopListening,
-    getMetrics,
-    reset,
-  }
+    error,
+    startRecording,
+    stopRecording,
+    isSupported: !!recognitionRef.current
+  };
+}
+
+// Legacy type export for backward compatibility
+export interface SpeechMetrics {
+  accuracy: number;
+  speed: number;
+  transcript: string;
+  durationSeconds: number;
 }
