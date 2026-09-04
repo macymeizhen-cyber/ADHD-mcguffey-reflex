@@ -1,0 +1,407 @@
+import type { Lesson } from '../types'
+
+export const LESSONS: Lesson[] = [
+  // ===== DIFFICULTY 1: FOUNDATIONAL PHONICS (Lessons 1-10) =====
+  {
+    id: 1,
+    title: "The Cat Sat",
+    content: "The cat sat on the mat. The cat is a big cat. The big cat sat on the red mat. Pat the cat. The cat is happy.",
+    anchor_phrases: ["The cat sat", "on the mat", "The big cat", "Pat the cat"],
+    difficulty: 1,
+    lesson_order: 1,
+    quiz_data: [
+      { question: "Where did the cat sit?", options: ["On the mat", "On the bed", "On the chair", "On the floor"], correctIndex: 0 },
+      { question: "What color was the mat?", options: ["Blue", "Red", "Green", "Yellow"], correctIndex: 1 },
+      { question: "What did you do to the cat?", options: ["Hugged the cat", "Pat the cat", "Fed the cat", "Washed the cat"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 2,
+    title: "The Big Red Dog",
+    content: "The big red dog ran fast. The dog ran to the top of the hill. The dog had a big red ball. The dog dropped the ball. The ball rolled down the hill. The dog ran to get the ball.",
+    anchor_phrases: ["The big red dog", "ran fast", "The dog ran", "rolled down the hill"],
+    difficulty: 1,
+    lesson_order: 2,
+    quiz_data: [
+      { question: "What color was the dog?", options: ["Blue", "Brown", "Red", "White"], correctIndex: 2 },
+      { question: "Where did the ball roll?", options: ["Up the hill", "Down the hill", "Into the house", "Under the car"], correctIndex: 1 },
+      { question: "What did the dog have?", options: ["A big stick", "A big red ball", "A big bone", "A big hat"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 3,
+    title: "Sam and the Tin Can",
+    content: "Sam had a tin can. The tin can was old and rusty. Sam put water in the tin can. He put a flower in the can. The flower was pink and soft. Sam smiled at the flower in the can.",
+    anchor_phrases: ["Sam had", "tin can", "The flower was pink", "Sam smiled"],
+    difficulty: 1,
+    lesson_order: 3,
+    quiz_data: [
+      { question: "What did Sam have?", options: ["A cup", "A tin can", "A glass", "A bowl"], correctIndex: 1 },
+      { question: "What was in the tin can?", options: ["A fish", "A pen", "A flower", "A rock"], correctIndex: 2 },
+      { question: "What color was the flower?", options: ["Red", "Blue", "Pink", "Yellow"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 4,
+    title: "The Bug on the Log",
+    content: "A small bug sat on a big log. The log was in the sun. The bug was warm on the log. A bird came to the log. The bird saw the bug on the log. The bug flew off the log. The bird was fast, but the bug was faster.",
+    anchor_phrases: ["A small bug", "sat on a big log", "The bug flew off", "The bird was fast"],
+    difficulty: 1,
+    lesson_order: 4,
+    quiz_data: [
+      { question: "Where did the bug sit?", options: ["On a leaf", "On a log", "On a rock", "On a flower"], correctIndex: 1 },
+      { question: "Why was the bug on the log?", options: ["It was cold", "It was warm", "It was hungry", "It was tired"], correctIndex: 1 },
+      { question: "Who came to the log?", options: ["A cat", "A dog", "A bird", "A fish"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 5,
+    title: "Up and Down",
+    content: "The sun is up. The sun is big and hot. The birds fly up in the sky. They fly high and then come down. Down, down, down to the nest. The nest is in the tree. The birds are safe in the nest.",
+    anchor_phrases: ["The sun is up", "fly high", "come down", "safe in the nest"],
+    difficulty: 1,
+    lesson_order: 5,
+    quiz_data: [
+      { question: "Where is the nest?", options: ["On the ground", "In the tree", "In the sky", "In the water"], correctIndex: 1 },
+      { question: "Where do the birds fly?", options: ["In the water", "In the sky", "In the house", "In the car"], correctIndex: 1 },
+      { question: "Are the birds safe in the nest?", options: ["Yes", "No", "Maybe", "Only at night"], correctIndex: 0 },
+    ]
+  },
+  {
+    id: 6,
+    title: "The Red Hen",
+    content: "The red hen had a plan. She found some corn. The corn was yellow and dry. She took the corn to the mill. The mill ground the corn into flour. The red hen made bread from the flour. The bread was warm and soft. Everyone loved the bread.",
+    anchor_phrases: ["The red hen", "found some corn", "made bread", "warm and soft"],
+    difficulty: 1,
+    lesson_order: 6,
+    quiz_data: [
+      { question: "What did the hen find?", options: ["Wheat", "Corn", "Rice", "Oats"], correctIndex: 1 },
+      { question: "What did the mill do?", options: ["Cooked the corn", "Ground the corn", "Planted the corn", "Watered the corn"], correctIndex: 1 },
+      { question: "What did the hen make?", options: ["Soup", "Salad", "Bread", "Cake"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 7,
+    title: "My Pet Fish",
+    content: "I have a pet fish. My fish is orange and small. The fish lives in a bowl. The bowl has water and small stones. The fish swims around all day. At night the fish sleeps behind the big stone. I feed my fish every morning.",
+    anchor_phrases: ["My pet fish", "swims around", "behind the big stone", "I feed my fish"],
+    difficulty: 1,
+    lesson_order: 7,
+    quiz_data: [
+      { question: "What color is the fish?", options: ["Blue", "Orange", "Green", "Red"], correctIndex: 1 },
+      { question: "Where does the fish sleep?", options: ["Behind the bowl", "Behind the big stone", "Behind the door", "Behind the chair"], correctIndex: 1 },
+      { question: "When do you feed the fish?", options: ["At night", "At lunch", "Every morning", "Every evening"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 8,
+    title: "Pop Goes the Top",
+    content: "The top can spin. Watch it spin fast. The top goes round and round. Round and round it goes. It spins on the floor. It spins by the door. Then it falls down. Pop goes the top!",
+    anchor_phrases: ["The top can spin", "round and round", "spins on the floor", "Pop goes the top"],
+    difficulty: 1,
+    lesson_order: 8,
+    quiz_data: [
+      { question: "What can the top do?", options: ["Jump", "Spin", "Fly", "Roll"], correctIndex: 1 },
+      { question: "Where does the top spin?", options: ["On the wall", "On the floor", "On the roof", "On the bed"], correctIndex: 1 },
+      { question: "What happens at the end?", options: ["It flies away", "It pops", "It breaks", "It sings"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 9,
+    title: "The Man with the Van",
+    content: "The man has a big van. The van is blue and fast. He drives the van to town. In the van he has boxes. The boxes are full of fruit. He brings the fruit to the shop. People buy the fruit. The man is happy in his van.",
+    anchor_phrases: ["The man has", "big van", "boxes full of fruit", "happy in his van"],
+    difficulty: 1,
+    lesson_order: 9,
+    quiz_data: [
+      { question: "What color is the van?", options: ["Red", "Blue", "Green", "Yellow"], correctIndex: 1 },
+      { question: "What is in the boxes?", options: ["Toys", "Books", "Fruit", "Clothes"], correctIndex: 2 },
+      { question: "Where does the man drive?", options: ["To the park", "To school", "To town", "To the beach"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 10,
+    title: "The Hen and the Pen",
+    content: "The hen had a pen. She wrote a note with the pen. The note said, 'I am the hen. I am not a penguin.' The hen laughed at her note. Then she put the pen in the den. The pen was safe in the den with the hen.",
+    anchor_phrases: ["The hen had a pen", "wrote a note", "I am the hen", "safe in the den"],
+    difficulty: 1,
+    lesson_order: 10,
+    quiz_data: [
+      { question: "What did the hen do with the pen?", options: ["Drew a picture", "Wrote a note", "Made a hat", "Built a wall"], correctIndex: 1 },
+      { question: "What did the note say?", options: ["I am a penguin", "I am the hen", "I am a duck", "I am a bird"], correctIndex: 1 },
+      { question: "Where did the hen put the pen?", options: ["In the coop", "In the den", "In the nest", "In the barn"], correctIndex: 1 },
+    ]
+  },
+
+  // ===== DIFFICULTY 2: DECODING & FLUENCY (Lessons 11-20) =====
+  {
+    id: 11,
+    title: "The Quick Brown Fox",
+    content: "A quick brown fox jumped over the lazy dog. The dog was sleeping under the old oak tree. The fox landed on the soft grass. The dog opened one eye, then closed it again. The fox trotted away through the garden. It was a beautiful autumn morning.",
+    anchor_phrases: ["quick brown fox", "jumped over", "lazy dog", "beautiful autumn morning"],
+    difficulty: 2,
+    lesson_order: 11,
+    quiz_data: [
+      { question: "What did the fox do?", options: ["Ran around the dog", "Jumped over the dog", "Barked at the dog", "Ignored the dog"], correctIndex: 1 },
+      { question: "Where was the dog sleeping?", options: ["On the porch", "Under the oak tree", "In the house", "By the fence"], correctIndex: 1 },
+      { question: "What season was it?", options: ["Spring", "Summer", "Autumn", "Winter"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 12,
+    title: "The Garden Trail",
+    content: "Maya found a trail of tiny flowers in the garden. Each flower was a different color — purple, yellow, and white. She followed the trail past the old fence and around the big pond. At the end of the trail, she discovered a hidden fairy house made of twigs and moss.",
+    anchor_phrases: ["trail of tiny flowers", "different color", "followed the trail", "hidden fairy house"],
+    difficulty: 2,
+    lesson_order: 12,
+    quiz_data: [
+      { question: "What colors were the flowers?", options: ["Red and blue", "Purple, yellow, and white", "Orange and pink", "Green and black"], correctIndex: 1 },
+      { question: "Where did the trail lead?", options: ["To a cave", "To a hidden fairy house", "To the ocean", "To a castle"], correctIndex: 1 },
+      { question: "What was the fairy house made of?", options: ["Bricks and glass", "Twigs and moss", "Wood and paint", "Stone and mud"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 13,
+    title: "The Thunderstorm",
+    content: "Dark clouds filled the sky. A loud clap of thunder shook the house. Lightning flashed across the sky like a giant spark. The rain came down hard and fast. It drummed on the roof like a thousand tiny fingers. Inside, the family sat together reading stories until the storm passed.",
+    anchor_phrases: ["Dark clouds filled", "loud clap of thunder", "drummed on the roof", "sat together reading"],
+    difficulty: 2,
+    lesson_order: 13,
+    quiz_data: [
+      { question: "What filled the sky?", options: ["Birds", "Dark clouds", "Stars", "Kites"], correctIndex: 1 },
+      { question: "What did the rain sound like?", options: ["A song", "A thousand tiny fingers", "A barking dog", "A ringing bell"], correctIndex: 1 },
+      { question: "What did the family do during the storm?", options: ["Went outside", "Slept", "Read stories", "Played games"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 14,
+    title: "The Pirate's Map",
+    content: "Captain Rose unfolded the ancient map. It showed a path across the sapphire sea to Skull Island. The treasure was marked with a golden X. Her crew cheered as they set the sails. The wind pushed their ship forward through the waves. By sunset, they could see the island on the horizon.",
+    anchor_phrases: ["ancient map", "sapphire sea", "golden X", "set the sails"],
+    difficulty: 2,
+    lesson_order: 14,
+    quiz_data: [
+      { question: "What was the treasure marked with?", options: ["A red circle", "A blue star", "A golden X", "A green arrow"], correctIndex: 2 },
+      { question: "What was the name of the captain?", options: ["Captain Jack", "Captain Rose", "Captain Hook", "Captain Blue"], correctIndex: 1 },
+      { question: "What did the wind do?", options: ["Stopped the ship", "Pushed the ship forward", "Turned the ship around", "Sank the ship"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 15,
+    title: "The Painting Challenge",
+    content: "Leo wanted to paint the most beautiful sunset anyone had ever seen. He mixed orange and pink for the sky. He added purple for the mountains in the distance. For the water, he used deep blue with tiny dots of silver. When he finished, his teacher hung his painting in the school hallway for everyone to admire.",
+    anchor_phrases: ["beautiful sunset", "mixed orange and pink", "deep blue", "hung his painting"],
+    difficulty: 2,
+    lesson_order: 15,
+    quiz_data: [
+      { question: "What did Leo want to paint?", options: ["A rainbow", "A sunset", "A flower", "A face"], correctIndex: 1 },
+      { question: "What color was the water?", options: ["Green", "Red", "Deep blue", "Yellow"], correctIndex: 2 },
+      { question: "Where was the painting hung?", options: ["In the gym", "In the hallway", "In the library", "In the cafeteria"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 16,
+    title: "The Lost Puppy",
+    content: "A small brown puppy wandered into the schoolyard during recess. It had floppy ears and a wagging tail. The children gathered around gently. Sofia noticed a collar with a tag that read 'Biscuit.' She called the number on the tag. The grateful owner arrived within minutes, thanking the kind children.",
+    anchor_phrases: ["small brown puppy", "floppy ears", "a collar with a tag", "grateful owner"],
+    difficulty: 2,
+    lesson_order: 16,
+    quiz_data: [
+      { question: "What was the puppy's name?", options: ["Cookie", "Biscuit", "Muffin", "Waffle"], correctIndex: 1 },
+      { question: "Where did the puppy wander?", options: ["To the park", "To the schoolyard", "To the store", "To the beach"], correctIndex: 1 },
+      { question: "What did Sofia notice?", options: ["A leash", "A collar with a tag", "A bowl of water", "A doghouse"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 17,
+    title: "Building a Treehouse",
+    content: "Jake and his dad carried lumber up the old oak tree. They measured twice and cut once, just like grandpa always said. Hammering nails into the branches, they built walls and a slanted roof. A rope ladder led up to a small window. When they finished, Jake looked out over the whole neighborhood from his new treehouse.",
+    anchor_phrases: ["carried lumber", "measured twice", "hammering nails", "rope ladder"],
+    difficulty: 2,
+    lesson_order: 17,
+    quiz_data: [
+      { question: "What did they build?", options: ["A fort", "A treehouse", "A bridge", "A fence"], correctIndex: 1 },
+      { question: "What led up to the window?", options: ["Stairs", "A ramp", "A rope ladder", "A wooden ladder"], correctIndex: 2 },
+      { question: "What did Jake see from the treehouse?", options: ["The ocean", "The mountains", "The neighborhood", "The clouds"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 18,
+    title: "The science experiment",
+    content: "For science class, Aisha mixed baking soda with vinegar in a glass bottle. The mixture fizzed and bubbled over the top like a volcano. Her classmates cheered with excitement. The chemical reaction created carbon dioxide gas. Aisha wrote down her observations carefully in her notebook. She dreamed of becoming a scientist.",
+    anchor_phrases: ["mixing baking soda", "fizzed and bubbled", "chemical reaction", "wrote down her observations"],
+    difficulty: 2,
+    lesson_order: 18,
+    quiz_data: [
+      { question: "What did Aisha mix together?", options: ["Salt and sugar", "Baking soda and vinegar", "Flour and water", "Sand and dirt"], correctIndex: 1 },
+      { question: "What gas was created?", options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Helium"], correctIndex: 2 },
+      { question: "What did Aisha want to become?", options: ["A teacher", "A doctor", "A scientist", "An artist"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 19,
+    title: "The Market Day",
+    content: "Every Saturday, the farmers market came alive with color and sound. Fresh strawberries sat in wooden crates beside bundles of green herbs. The baker offered warm loaves of bread and honey cakes. Children ran between the stalls, tasting samples of cheese and fresh apple juice. It was the highlight of the week for the whole town.",
+    anchor_phrases: ["farmers market", "wooden crates", "warm loaves of bread", "highlight of the week"],
+    difficulty: 2,
+    lesson_order: 19,
+    quiz_data: [
+      { question: "When did the market come alive?", options: ["Every Sunday", "Every Saturday", "Every Monday", "Every Friday"], correctIndex: 1 },
+      { question: "What did the baker offer?", options: ["Pizza and soup", "Warm loaves of bread and honey cakes", "Cookies and milk", "Salads and sandwiches"], correctIndex: 1 },
+      { question: "What did the children taste?", options: ["Ice cream and candy", "Cheese and apple juice", "Cake and pie", "Fruit and vegetables"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 20,
+    title: "The Stargazer",
+    content: "Every clear night, Elena climbed to the rooftop with her telescope. She could see craters on the moon and rings around Saturn. The Milky Way stretched across the sky like a river of light. She kept a journal with drawings of constellations. Her favorite was Orion, the hunter, with his three bright belt stars.",
+    anchor_phrases: ["with her telescope", "rings around Saturn", "river of light", "Orion the hunter"],
+    difficulty: 2,
+    lesson_order: 20,
+    quiz_data: [
+      { question: "What did Elena climb to with her telescope?", options: ["The balcony", "The rooftop", "The hill", "The tree"], correctIndex: 1 },
+      { question: "What was her favorite constellation?", options: ["Ursa Major", "Cassiopeia", "Orion", "Polaris"], correctIndex: 2 },
+      { question: "What did the Milky Way look like?", options: ["A blanket of snow", "A river of light", "A curtain of fire", "A wall of ice"], correctIndex: 1 },
+    ]
+  },
+
+  // ===== DIFFICULTY 3: COMPREHENSION & EXPRESSION (Lessons 21-30) =====
+  {
+    id: 21,
+    title: "The Courage of Kindness",
+    content: "Standing up for someone else takes real courage, even when your voice shakes. When Marcus noticed the new student sitting alone at lunch every day, he made a choice. He walked over, smiled, and said, 'Want to sit with us?' That simple act of kindness changed everything. The new student, Raj, later told Marcus it was the best day of his entire year. Sometimes the bravest thing we can do is simply be kind.",
+    anchor_phrases: ["voice shakes", "made a choice", "simple act of kindness", "bravest thing"],
+    difficulty: 3,
+    lesson_order: 21,
+    quiz_data: [
+      { question: "Why did Marcus walk over to Raj?", options: ["The teacher told him to", "He felt sorry for him", "He wanted to be kind", "He needed help"], correctIndex: 2 },
+      { question: "What did Marcus say to Raj?", options: ["'Are you okay?'", "'Want to sit with us?'", "'Who are you?'", "'Follow me.'"], correctIndex: 1 },
+      { question: "What is the main idea of this story?", options: ["Making friends is easy", "Courage can be found in kindness", "New students are always lonely", "Lunch is the best part of school"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 22,
+    title: "The Whispering Library",
+    content: "The old library on Maple Street had a secret — if you listened carefully between the shelves, you could hear the books whispering. Not words exactly, but feelings. The adventure books hummed with excitement. The mystery novels tickled your ears with curiosity. And the poetry section? It sang softly, like wind chimes on a gentle evening. Twelve-year-old Zoe discovered this gift the day she accidentally dropped her hearing aids in a puddle. Without them, she heard what no one else could — the library's true voice.",
+    anchor_phrases: ["between the shelves", "adventure books hummed", "poetry section sang", "library's true voice"],
+    difficulty: 3,
+    lesson_order: 22,
+    quiz_data: [
+      { question: "What could you hear between the shelves?", options: ["Music playing", "People talking", "Books whispering", "Birds singing"], correctIndex: 2 },
+      { question: "How did Zoe discover the secret?", options: ["She read a book", "She dropped her hearing aids", "Someone told her", "She dreamed about it"], correctIndex: 1 },
+      { question: "What did the poetry section do?", options: ["Told jokes", "Sang softly", "Cried loudly", "Spoke in riddles"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 23,
+    title: "The Bridge Builder",
+    content: "When the river flooded every spring, the children of two villages could not visit each other. Old Thomas, the carpenter, decided to build a bridge. He worked alone for three months, carving each beam by hand. Some people laughed and said one old man could not build a bridge. But Thomas measured carefully, planned wisely, and never gave up. On the day the bridge opened, children from both villages ran across it, laughing and holding hands. Thomas smiled from his workshop window, knowing that bridges connect more than just land.",
+    anchor_phrases: ["river flooded", "carving each beam", "never gave up", "bridges connect more than land"],
+    difficulty: 3,
+    lesson_order: 23,
+    quiz_data: [
+      { question: "Why did Thomas build the bridge?", options: ["To make money", "So children could visit each other", "To prove he was strong", "Because the mayor asked"], correctIndex: 1 },
+      { question: "How long did Thomas work alone?", options: ["One month", "Two months", "Three months", "Six months"], correctIndex: 2 },
+      { question: "What does the story suggest about bridges?", options: ["They are easy to build", "They are only for crossing rivers", "They connect people, not just places", "They last forever"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 24,
+    title: "Electric Dreams",
+    content: "In the year 2147, seven-year-old Aria attended classes in a floating classroom above the clouds. Her teacher was a hologram named Professor Pixel who could appear in any form — a dinosaur, a Shakespearean actor, or even a talking pencil. Today, Professor Pixel was dressed as a deep-sea diver to teach about ocean currents. Students reached into virtual water with haptic gloves, feeling the pull of the Gulf Stream. Aria raised her hand and asked, 'If the ocean currents change, what happens to the fish?' Professor Pixel smiled. 'Now that,' he said, 'is exactly the right question.'",
+    anchor_phrases: ["floating classroom", "hologram named Professor Pixel", "haptic gloves", "exactly the right question"],
+    difficulty: 3,
+    lesson_order: 24,
+    quiz_data: [
+      { question: "Where were the classes held?", options: ["Underground", "On a mountain", "Above the clouds", "Underwater"], correctIndex: 2 },
+      { question: "Who was Professor Pixel?", options: ["A real professor", "A hologram", "A robot", "A parent volunteer"], correctIndex: 1 },
+      { question: "What was Professor Pixel dressed as today?", options: ["An astronaut", "A cowboy", "A deep-sea diver", "A chef"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 25,
+    title: "The Unforgettable Lighthouse",
+    content: "For forty-seven years, Walter Chen kept the lighthouse running on Peregrine Point. Every evening at sunset, he polished the great lens until it gleamed like a diamond. Ships navigating the treacherous rocky coast depended on his light. When automated systems were installed to replace him, Walter felt both relieved and heartbroken. On his last night, he watched from the cliff as the new electric beam swept across the waves. A passing ship sounded three blasts of its horn — the traditional sailor's salute to a keeper of the light. Walter wiped his eyes and whispered, 'Fair winds, old friends.'",
+    anchor_phrases: ["forty-seven years", "polished the great lens", "treacherous rocky coast", "keeper of the light"],
+    difficulty: 3,
+    lesson_order: 25,
+    quiz_data: [
+      { question: "How long did Walter keep the lighthouse?", options: ["Thirty years", "Forty-seven years", "Fifty years", "Twenty years"], correctIndex: 1 },
+      { question: "What did the ship sound as a salute?", options: ["One long blast", "Two short blasts", "Three blasts", "A melody"], correctIndex: 2 },
+      { question: "How did Walter feel about the automation?", options: ["Only happy", "Only sad", "Relieved and heartbroken", "Angry"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 26,
+    title: "The Secret Garden of Words",
+    content: "Behind the crumbling wall of the abandoned bookshop, twelve-year-old Daniel discovered a garden unlike any other. Instead of flowers, words grew on vines — beautiful, shimmering words that floated when touched. He picked the word 'imagine' and watched it dissolve into a thousand butterflies. The word 'courage' grew into a sturdy oak tree. But the rarest word, 'empathy,' grew only in shade, requiring patience and quiet observation. Daniel realized that some words, like some truths, can only be found by those who take the time to look carefully.",
+    anchor_phrases: ["abandoned bookshop", "words grew on vines", "rarest word empathy", "time to look carefully"],
+    difficulty: 3,
+    lesson_order: 26,
+    quiz_data: [
+      { question: "What grew in the secret garden?", options: ["Real flowers", "Words on vines", "Trees and bushes", "Mushrooms"], correctIndex: 1 },
+      { question: "What happened when Daniel picked 'imagine'?", options: ["It turned to gold", "It became butterflies", "It sang a song", "It disappeared"], correctIndex: 1 },
+      { question: "What is the main lesson Daniel learned?", options: ["Gardens are beautiful", "Words are powerful", "Patience reveals hidden truths", "Old bookshops are dangerous"], correctIndex: 2 },
+    ]
+  },
+  {
+    id: 27,
+    title: "The Cartographer's Daughter",
+    content: "Inherited from her grandmother, Amara found an ancient map of a city that no longer existed. The streets were drawn in faded ink, and tiny illustrations showed bakeries, fountains, and a grand library. Her grandmother had added her own notes in the margins: 'The best bread was on Elm Street' and 'Here is where I first fell in love.' Amara realized the map was not just geography — it was a love letter to a place that lived on only in memory. She carefully traced each street with her finger, honoring a world that time had erased but love had preserved.",
+    anchor_phrases: ["ancient map", "faded ink", "love letter to a place", "love had preserved"],
+    difficulty: 3,
+    lesson_order: 27,
+    quiz_data: [
+      { question: "What did Amara find?", options: ["A photograph", "An ancient map", "A diary", "A painting"], correctIndex: 1 },
+      { question: "What was the map really about?", options: ["Geography only", "A love letter to a place", "A treasure hunt", "A school project"], correctIndex: 1 },
+      { question: "What did Amara's grandmother note about Elm Street?", options: ["It was dangerous", "The best bread was there", "It was abandoned", "It had the tallest building"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 28,
+    title: "The Sound of Snow",
+    content: "Dr. Yuki Tanaka spent her career studying something most people never noticed — the sound of snow falling. Using ultra-sensitive microphones buried in Antarctic ice, she discovered that each type of snowflake makes a different sound. Fresh powder whispers. Wet snow hums. Ice crystals click like tiny castanets. Her research helped engineers design quieter aircraft and better soundproofing for hospitals. But what Dr. Tanaka treasured most was the quiet moments alone in the snow, listening to a symphony that had been playing for millions of years, waiting for someone to pay attention.",
+    anchor_phrases: ["sound of snow", "each type of snowflake", "tiny castanets", "waiting for someone to pay attention"],
+    difficulty: 3,
+    lesson_order: 28,
+    quiz_data: [
+      { question: "What did Dr. Tanaka study?", options: ["The ocean", "The sound of snow falling", "Animal calls", "Wind patterns"], correctIndex: 1 },
+      { question: "What do ice crystals sound like?", options: ["Like whispers", "Like humming", "Like tiny castanets", "Like thunder"], correctIndex: 2 },
+      { question: "What practical use did her research have?", options: ["Better cooking", "Quieter aircraft and soundproofing", "Faster trains", "Stronger buildings"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 29,
+    title: "Letters Never Sent",
+    content: "In the attic, Grandpa Joe found a box of letters he had written as a young soldier but never mailed. Each letter described ordinary moments with extraordinary tenderness — the way morning light fell across a tent, the taste of an apple shared with a friend, the sound of laughter echoing across a field at dusk. Reading them decades later, Joe realized that the most meaningful things in life are not grand declarations but small, quiet observations. He mailed the letters to his grandchildren with a note: 'Pay attention to the little things. They are actually the big things.'",
+    anchor_phrases: ["never mailed", "extraordinary tenderness", "small quiet observations", "they are actually the big things"],
+    difficulty: 3,
+    lesson_order: 29,
+    quiz_data: [
+      { question: "What did Grandpa Joe find in the attic?", options: ["Old photographs", "A box of never-mailed letters", "A treasure chest", "Old clothes"], correctIndex: 1 },
+      { question: "What did the letters describe?", options: ["Battles and wars", "Ordinary moments with tenderness", "Recipes and instructions", "Maps and directions"], correctIndex: 1 },
+      { question: "What was Grandpa Joe's message to his grandchildren?", options: ["Study hard", "Pay attention to little things", "Travel the world", "Save money"], correctIndex: 1 },
+    ]
+  },
+  {
+    id: 30,
+    title: "The Compass Within",
+    content: "On her first day as a doctor, Dr. Priya Sharma felt the weight of a thousand doubts. What if she was not smart enough? What if she made a mistake? During her first emergency, a child with a severe asthma attack, every textbook answer seemed to vanish from her mind. But then she looked into the frightened eyes of the child's mother, took a deep breath, and trusted her training. She administered the treatment perfectly. Afterward, the mother hugged her and whispered, 'You were exactly what my daughter needed.' Dr. Priya learned that day that knowledge opens the door, but compassion walks through it. The compass within — that combination of skill and heart — is what truly guides us.",
+    anchor_phrases: ["weight of a thousand doubts", "trusted her training", "compass walks through it", "compass within"],
+    difficulty: 3,
+    lesson_order: 30,
+    quiz_data: [
+      { question: "What was Dr. Sharma's first emergency?", options: ["A broken arm", "A child with asthma", "A car accident", "A burn injury"], correctIndex: 1 },
+      { question: "What helped Dr. Sharma succeed?", options: ["A textbook", "Her phone", "Trusting her training", "Asking for help"], correctIndex: 2 },
+      { question: "What is the 'compass within'?", options: ["A GPS device", "A moral code", "The combination of skill and heart", "A medical instrument"], correctIndex: 2 },
+    ]
+  },
+]
+
+export function getLessonsByDifficulty(difficulty: 1 | 2 | 3): Lesson[] {
+  return LESSONS.filter(l => l.difficulty === difficulty)
+}
+
+export function getLessonById(id: number): Lesson | undefined {
+  return LESSONS.find(l => l.id === id)
+}
