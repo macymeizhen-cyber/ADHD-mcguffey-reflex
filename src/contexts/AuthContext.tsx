@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, useCallback } from 'rea
 import type { ReactNode } from 'react'
 import type { User, Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
+import { enableLocalMode, disableLocalMode, isLocalMode } from '../lib/progressStore'
 import type { Profile } from '../types'
 
 interface AuthContextType {
@@ -9,8 +10,10 @@ interface AuthContextType {
   profile: Profile | null
   session: Session | null
   loading: boolean
+  localMode: boolean
   signIn: (email: string, password: string) => Promise<{ error?: string }>
   signUp: (email: string, password: string, username: string) => Promise<{ error?: string }>
+  signInAnonymously: () => Promise<{ error?: string }>
   signOut: () => Promise<void>
 }
 
@@ -21,6 +24,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [localMode, setLocalMode] = useState(false)
 
   const fetchProfile = useCallback(async (userId: string) => {
     const { data } = await supabase
@@ -32,6 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
+    setLocalMode(isLocalMode())
     supabase.auth.getSession().then(({ data: { session: s } }) => {
       setSession(s)
       setUser(s?.user ?? null)
@@ -68,8 +73,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut()
   }
 
+  const ensureGuestProfile = useCallback(async (userId: string, username?: string) => {
+    const { count } = await supabase
+      .from('profiles')
+      .select('id', { count: 'exact', head: true })
+      .eq('id', userId)
+    if (count === 0) {
+      await supabase.from('profiles').insert({ id: userId, username: username || 'Guest Reader' })
+    }
+
+    const { count: streakCount } = await supabase
+      .from('streaks')
+      .select('user_id', { count: 'exact', head: true })
+      .eq('user_id', userId)
+    if (streakCount === 0) {
+      await supabase.from('streaks').insert({ user_id: userId })
+    }
+  }, [])
+
+  const signInAnonymously = useCallback(async () => {
+    const { data, error } = await supabase.auth.signInAnonymously()
+    if (error) {
+      enableLocalMode()
+      setLocalMode(true)
+      return { error: error.message }
+    }
+    disableLocalMode()
+    setLocalMode(false)
+    if (data.user) {
+      await ensureGuestProfile(data.user.id)
+    }
+    return {}
+  }, [ensureGuestProfile])
+
   return (
-    <AuthContext.Provider value={{ user, profile, session, loading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ user, profile, session, loading, localMode, signIn, signUp, signInAnonymously, signOut }}>
       {children}
     </AuthContext.Provider>
   )

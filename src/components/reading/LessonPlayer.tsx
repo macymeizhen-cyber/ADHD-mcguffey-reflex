@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { LESSONS, getLessonById } from '../../data/lessons'
 import { useAuth } from '../../contexts/AuthContext'
-import { supabase } from '../../lib/supabase'
+import { saveAttempt, fetchStreak, updateStreak } from '../../lib/progressStore'
 import ShadowReader from '../reading/ShadowReader'
 import QuizModal from '../quiz/QuizModal'
 import type { SpeechMetrics } from '../../hooks/useSpeechRecognition'
@@ -48,24 +48,19 @@ export default function LessonPlayer() {
 
     const mastered = (metrics?.accuracy || 0) >= 90 && score >= 80
 
-    if (user && !saved) {
+    if (!saved) {
       setSaved(true)
 
-      await supabase.from('attempts').insert({
-        user_id: user.id,
+      await saveAttempt({
         lesson_id: lessonId,
         accuracy: metrics?.accuracy || 0,
         speed: metrics?.speed || 0,
         mastered,
         transcript: metrics?.transcript || '',
         attempt_duration_seconds: metrics?.durationSeconds || 0,
-      })
+      }, user?.id)
 
-      const { data: streakData } = await supabase
-        .from('streaks')
-        .select('*')
-        .eq('user_id', user.id)
-        .single()
+      const { data: streakData } = await fetchStreak()
 
       if (streakData) {
         const today = new Date().toISOString().split('T')[0]
@@ -73,23 +68,18 @@ export default function LessonPlayer() {
         const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0]
 
         let newStreak = streakData.current_streak
-        if (lastDate === today) {
-          // Already practiced today
-        } else if (lastDate === yesterday) {
-          newStreak = streakData.current_streak + 1
-        } else {
-          newStreak = 1
+        if (lastDate !== today) {
+          newStreak = lastDate === yesterday ? streakData.current_streak + 1 : 1
         }
 
         const points = mastered ? 100 : Math.round((metrics?.accuracy || 0))
 
-        await supabase.from('streaks').update({
+        await updateStreak({
           current_streak: newStreak,
           longest_streak: Math.max(newStreak, streakData.longest_streak),
           last_activity_date: today,
           total_focus_points: streakData.total_focus_points + points,
-          updated_at: new Date().toISOString(),
-        }).eq('user_id', user.id)
+        })
       }
     }
   }

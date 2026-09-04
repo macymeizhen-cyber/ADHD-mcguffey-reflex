@@ -1,18 +1,24 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
-import ProtectedRoute from './components/layout/ProtectedRoute'
 import Navbar from './components/layout/Navbar'
 import { useAuth } from './contexts/AuthContext'
-import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
+import { LoginPage } from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import LessonsPage from './pages/LessonsPage'
 import LessonPage from './pages/LessonPage'
 
 function AppLayout() {
-  const { user } = useAuth()
+  const { user, localMode } = useAuth()
+  const navigate = useNavigate()
 
-  if (!user) return null
+  useEffect(() => {
+    if (user && window.location.hash.replace('#', '').startsWith('/login')) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [user, navigate])
+
+  if (!user && !localMode) return <LoginPage />
 
   return (
     <div className="min-h-screen">
@@ -35,15 +41,13 @@ export default function App() {
     <AuthProvider>
       <HashRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
           <Route
             path="/*"
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
+            element={<AppLayout />}
           />
         </Routes>
       </HashRouter>

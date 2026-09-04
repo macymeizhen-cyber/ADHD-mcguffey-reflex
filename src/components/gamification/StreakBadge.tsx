@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react'
-import { useAuth } from '../../contexts/AuthContext'
-import { supabase } from '../../lib/supabase'
+import { fetchStreak } from '../../lib/progressStore'
 
 export default function StreakBadge() {
-  const { user } = useAuth()
   const [streak, setStreak] = useState(0)
   const [longestStreak, setLongestStreak] = useState(0)
   const [focusPoints, setFocusPoints] = useState(0)
 
   useEffect(() => {
-    if (!user) return
-
-    const fetchStreak = async () => {
-      const { data } = await supabase
-        .from('streaks')
-        .select('*')
-        .eq('user_id', user.id)
-        .single()
+    const fetchStreakData = async () => {
+      const { data } = await fetchStreak()
 
       if (data) {
         setStreak(data.current_streak)
@@ -25,8 +17,8 @@ export default function StreakBadge() {
       }
     }
 
-    fetchStreak()
-  }, [user])
+    fetchStreakData()
+  }, [])
 
   const streakLevel = streak >= 7 ? 'fire' : streak >= 3 ? 'star' : streak > 0 ? 'spark' : 'none'
 

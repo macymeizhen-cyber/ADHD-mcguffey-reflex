@@ -3,7 +3,7 @@ import { LESSONS } from '../../data/lessons'
 import LessonCard from './LessonCard'
 import StreakBadge from '../gamification/StreakBadge'
 import { useState, useEffect } from 'react'
-import { supabase } from '../../lib/supabase'
+import { fetchAttempts } from '../../lib/progressStore'
 
 interface ProgressData {
   mastered_count: number
@@ -13,20 +13,14 @@ interface ProgressData {
 }
 
 export default function Dashboard() {
-  const { user, profile } = useAuth()
+  const { profile } = useAuth()
   const [progress, setProgress] = useState<ProgressData | null>(null)
   const [recentAttempts, setRecentAttempts] = useState<{ lesson_id: number; accuracy: number; mastered: boolean }[]>([])
   const [selectedDifficulty, setSelectedDifficulty] = useState<0 | 1 | 2 | 3>(0)
 
   useEffect(() => {
-    if (!user) return
-
     const fetchData = async () => {
-      const { data: progressData } = await supabase
-        .from('attempts')
-        .select('lesson_id, accuracy, speed, mastered')
-        .eq('user_id', user.id)
-        .order('attempted_at', { ascending: false })
+      const { data: progressData } = await fetchAttempts()
 
       if (progressData) {
         const masteredLessons = new Set(progressData.filter(a => a.mastered).map(a => a.lesson_id))
@@ -53,7 +47,7 @@ export default function Dashboard() {
     }
 
     fetchData()
-  }, [user])
+  }, [])
 
   const totalLessons = LESSONS.length
   const masteredCount = progress?.mastered_count || 0
